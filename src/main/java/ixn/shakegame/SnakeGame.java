@@ -1,6 +1,5 @@
 package ixn.shakegame;
 
-import com.sun.xml.internal.ws.api.server.Adapter;
 import ixn.shakegame.objects.Apple;
 import ixn.shakegame.objects.Snake;
 
