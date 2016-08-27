@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Антон on 20.08.2016.
@@ -34,32 +37,50 @@ public class SnakeGame extends JPanel implements ActionListener{
     public void paint(Graphics g) {
         g.setColor(color(5, 50, 10));
         g.fillRect(0, 0, WIDTH*SCALE, HEIGHT*SCALE);
-        g.setColor(color(255,216,0));
+//        g.setColor(color(255,216,0));
 
-        for (int x = 0; x <= WIDTH*SCALE; x += SCALE) {
-            g.drawLine(x, 0, x, HEIGHT*SCALE);
-        }
-
-        for (int y = 0; y <= HEIGHT*SCALE; y += SCALE) {
-            g.drawLine(0, y, WIDTH*SCALE, y);
-        }
+//        for (int x = 0; x <= WIDTH*SCALE; x += SCALE) {
+//            g.drawLine(x, 0, x, HEIGHT*SCALE);
+//        }
+//
+//        for (int y = 0; y <= HEIGHT*SCALE; y += SCALE) {
+//            g.drawLine(0, y, WIDTH*SCALE, y);
+//        }
 
         for (int d = 0; d < s.length; d++) {
             g.setColor(color(200,150,0));
             g.fillRect(s.snakeX[d]*SCALE, s.snakeY[d]*SCALE, SCALE, SCALE);
         }
 
-        g.setColor(color(255,0,0));
-        g.fillRect(a.posX*SCALE+1, a.posY*SCALE+1, SCALE-1, SCALE-1);
+        ImageIcon imageIcon = new ImageIcon("src/main/resource/images/Rabbit.png"); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it
+        g.drawImage(ScaledImage(image, SCALE, SCALE), a.posX*SCALE+1, a.posY*SCALE+1, this);
     }
 
     public Color color(int red, int green, int blue) {
         return new Color(red, green, blue);
     }
 
-    public static void main(String[] args) {
-        JFrame f = new JFrame();
+    private static Image ScaledImage(Image img, int w, int h) {
+        final BufferedImage bufferedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D graphics2D = bufferedImage.createGraphics();
+        graphics2D.setComposite(AlphaComposite.Src);
+        graphics2D.drawImage(img, 0, 0, w, h, null);
+        graphics2D.dispose();
+        return bufferedImage;
+    }
+
+    public static void main(String[] args) throws MalformedURLException {
+        JFrame f = new JFrame("Snake");
+
+//        ImageIcon imageIcon = new ImageIcon("src/main/resource/images/Rabbit.png"); // load the image to a imageIcon
+//        Image image = imageIcon.getImage(); // transform it
+//        imageIcon = new ImageIcon(ScaledImage(image, 120, 120));
+
+//        JLabel label = new JLabel(imageIcon);
+//        f.getContentPane().add(label);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        f.pack();
         f.setResizable(false);
         f.setSize(WIDTH*SCALE+SCALE/4, HEIGHT*SCALE+SCALE);
         f.setLocationRelativeTo(null);
