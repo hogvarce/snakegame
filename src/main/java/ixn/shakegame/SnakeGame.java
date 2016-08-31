@@ -59,7 +59,7 @@ public class SnakeGame extends JPanel implements ActionListener{
             } else if (d == max) {
                 imageIcon = new ImageIcon("src/main/resource/images/snakeend.png"); // load the image to a imageIcon
                 image = imageIcon.getImage(); // transform it
-                g.drawImage(ScaledImage(image, SCALE, SCALE, (s.direction * 90)), s.snakeX[d] * SCALE, s.snakeY[d] * SCALE, this);
+                g.drawImage(ScaledImage(image, SCALE, SCALE, (s.direction * 90)*s.directions[d]), s.snakeX[d] * SCALE, s.snakeY[d] * SCALE, this);
             } else {
                 g.setColor(color(200,150,0));
                 g.fillRect(s.snakeX[d]*SCALE, s.snakeY[d]*SCALE, SCALE, SCALE);

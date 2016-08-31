@@ -17,6 +17,8 @@ public class Snake {
     public int snakeX[] = new int[main.WIDTH* SCALE];
     public int snakeY[] = new int[main.HEIGHT* SCALE];
 
+    public int directions[] = new int[length];
+
     public Snake(int x0, int y0, int x1, int y1) {
         snakeX[0] = x0;
         snakeY[0] = y0;
@@ -34,6 +36,7 @@ public class Snake {
         for (int d = length; d > 0; d--) {
             snakeX[d] = snakeX[d-1];
             snakeY[d] = snakeY[d-1];
+            directions[d-1] = direction;
         }
 
         if(direction == 0) snakeX[0]++;
